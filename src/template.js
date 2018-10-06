@@ -40,7 +40,7 @@ const template = (channel, data) => {
                             short: true
                         }
                     ],
-                    footer: `by <https://github.com/${user.login}|${login}(${user.name})>`,
+                    footer: `by <https://github.com/${user.login}|${user.login}(${user.name})>`,
                     footer_icon: user.avatar_url,
                     ts: moment.tz('Asia/Bangkok').unix()
                 }
