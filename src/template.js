@@ -13,7 +13,7 @@ const template = (channel, data) => {
                     fields: [
                         {
                             title: "Commit",
-                            value: `<https://github.com/appman-agm/azay-sign-mapper/commit/${vcs_revision}|${vcs_revision}> (${subject})`,
+                            value: `<https://github.com/appman-agm/azay-sign-mapper/commit/${vcs_revision}|${vcs_revision.substring(0, 7)}> (${subject})`,
                             short: true
                         },
                         {
