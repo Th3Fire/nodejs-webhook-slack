@@ -1,4 +1,7 @@
 
+const moment = require('moment-timezone')
+
+
 const template = (channel, data) => {
     let s
     if (data){
@@ -37,9 +40,9 @@ const template = (channel, data) => {
                             short: true
                         }
                     ],
-                    footer: `by <https://github.com/${user.login}|${user.name}>`,
+                    footer: `by <https://github.com/${user.login}|${login}(${user.name})>`,
                     footer_icon: user.avatar_url,
-                    ts: new Date().getTime()
+                    ts: moment.tz('Asia/Bangkok').unix()
                 }
             ]
         }
