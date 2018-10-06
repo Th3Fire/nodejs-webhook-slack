@@ -14,8 +14,9 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
     if (req.body) {
-        console.log(req.body)
+        
         const result = template(req.body)
+        console.log('result : ', result)
 
         const options = {
             method: 'POST',
@@ -26,7 +27,7 @@ app.post('/webhook', (req, res) => {
 
         axios(options)
             .then((res) => {
-                console.log('res :', res)
+                console.log('success')
             })
             .catch((err) => {
                 console.log('err :', err)
