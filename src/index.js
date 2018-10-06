@@ -8,7 +8,7 @@ const template = require('./template')
 const port = process.env.PORT || 3000
 
 const slackChannelId = process.env.CHANNEL_ID || ''
-const slackToken = process.env.TOKEN || 'xoxp-263257028645-365043984871-450676757858-7a68ecdaa241260832b674e29b10ba5b'
+const slackToken = process.env.TOKEN || ''
 
 app.use(bodyParser.json());
 
