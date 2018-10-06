@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-webhook-slack",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/wuttinanDEV/nodejs-webhook-slack.git",
+  "author": "<wuttinan.wch@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
