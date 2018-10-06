@@ -10,3 +10,5 @@ const msToTime = (duration) => {
 
     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
 }
+
+module.exports = msToTime
