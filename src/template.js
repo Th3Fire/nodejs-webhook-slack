@@ -1,5 +1,6 @@
 
 const template = (data) => {
+    console.log('data: ', data )
     let s
     if (data){
         const { status, failed, subject, user, branch, vcs_revision, build_num, build_url, committer_email, committer_name, build_time_millis, start_time, stop_time, previous } = data.payload

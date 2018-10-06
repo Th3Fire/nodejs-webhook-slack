@@ -14,8 +14,10 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
     if (req.body) {
+
+        console.log('req.body: ', req.body)
         
-        const result = template(req.body)
+        const result = JSON.stringify(template(req.body))
         console.log('result : ', result)
 
         const options = {
@@ -27,16 +29,15 @@ app.post('/webhook', (req, res) => {
 
         axios(options)
             .then((res) => {
-                console.log('success')
+                console.log('success : ', res)
             })
             .catch((err) => {
                 console.log('err :', err)
             })
 
-    }else {
-        res.send('GOT IT!')
-        res.status(200)
     }
+    res.send('GOT IT!')
+    res.status(200)
 
 })
 
