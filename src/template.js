@@ -1,18 +1,19 @@
 
 const moment = require('moment-timezone')
-
+const msToTime = require('./utils/time')
 
 const template = (channel, data) => {
     let s
     if (data){
         const { status, failed, subject, user, branch, vcs_revision, build_num, build_url, committer_email, committer_name, build_time_millis, start_time, stop_time, previous } = data.payload
+        const colorTemplate = failed ? "danger" : "good"
         s =
         {
             channel: channel,
             attachments: [
                 {
                     text: `<${build_url}|#${build_num}> - รายงานสถานะ Circleci`,
-                    color: `${failed} ? "danger" : "good"`,
+                    color: colorTemplate,
                     fields: [
                         {
                             title: "Commit",
@@ -35,8 +36,8 @@ const template = (channel, data) => {
                             short: true
                         },
                         {
-                            title: "Build Time",
-                            value: `${build_time_millis}` ,
+                            title: "Build time",
+                            value: msToTime(build_time_millis),
                             short: true
                         }
                     ],
