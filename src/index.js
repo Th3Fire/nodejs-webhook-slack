@@ -19,7 +19,7 @@ app.post('/webhook', (req, res) => {
 
         const options = {
             method: 'POST',
-            headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer xoxp-263257028645-365043984871-450889583637-7c8a620601979f7544ae5388e3c729be' },
+            headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
             data: { channel: "GD9MHGK0X", result },
             url: 'https://slack.com/api/chat.postMessage'
         }
