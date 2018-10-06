@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
     if (req.body) {
-        
+        console.log(req.body)
         const result = template(req.body)
 
         const options = {
