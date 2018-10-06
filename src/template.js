@@ -1,16 +1,11 @@
 
-const template = (data) => {
-    console.log('data: ', data )
+const template = (channel, data) => {
     let s
     if (data){
         const { status, failed, subject, user, branch, vcs_revision, build_num, build_url, committer_email, committer_name, build_time_millis, start_time, stop_time, previous } = data.payload
-
-        console.log('data: ', data)
-        console.log('status: ', status)
-        console.log('user: ', user)
-
         s =
         {
+            channel: channel,
             attachments: [
                 {
                     text: `<${build_url}|#${build_num}> - รายงานสถานะ Circleci`,
@@ -18,12 +13,12 @@ const template = (data) => {
                     fields: [
                         {
                             title: "Commit",
-                            value: `<https://github.com/appman-agm/azay-sign-mapper/commit/${vcs_revision}> (${subject})`,
+                            value: `<https://github.com/appman-agm/azay-sign-mapper/commit/${vcs_revision}|${vcs_revision}> (${subject})`,
                             short: true
                         },
                         {
                             title: "Status",
-                            value: `${failed} ? "Fail" : "Success"`,
+                            value: status,
                             short: true
                         },
                         {

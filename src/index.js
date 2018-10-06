@@ -8,22 +8,19 @@ const template = require('./template')
 const port = process.env.PORT || 3000
 
 const slackChannelId = process.env.CHANNEL_ID || ''
-const slackToken = process.env.TOKEN || ''
+const slackToken = process.env.TOKEN || 'xoxp-263257028645-365043984871-450676757858-7a68ecdaa241260832b674e29b10ba5b'
 
 app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
-    if (req.body) {
-
-        console.log('req.body: ', req.body)
-        
-        const result = JSON.stringify(template(req.body))
+    if (req.body) {        
+        const result = JSON.stringify(template(slackChannelId, req.body))
         console.log('result : ', result)
-
+    
         const options = {
             method: 'POST',
             headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
-            data: { channel: "GD9MHGK0X", result },
+            data: result,
             url: 'https://slack.com/api/chat.postMessage'
         }
 
