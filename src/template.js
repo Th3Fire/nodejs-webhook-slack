@@ -2,7 +2,7 @@
 const moment = require('moment-timezone')
 const msToTime = require('./utils/time')
 
-const template = (channel, data) => {
+const template = (channel, gitRepo, data) => {
     let s
     if (data){
         const { status, failed, subject, user, branch, vcs_revision, build_num, build_url, committer_email, committer_name, build_time_millis, start_time, stop_time, previous } = data.payload
@@ -17,7 +17,7 @@ const template = (channel, data) => {
                     fields: [
                         {
                             title: "Commit",
-                            value: `<https://github.com/appman-agm/azay-sign-mapper/commit/${vcs_revision}|${vcs_revision.substring(0, 7)}> (${subject})`,
+                            value: `${gitRepo}/commit/${vcs_revision}|${vcs_revision.substring(0, 7)}> (${subject})`,
                             short: true
                         },
                         {

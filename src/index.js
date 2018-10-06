@@ -6,6 +6,7 @@ const app = express()
 const template = require('./template')
 
 const port = process.env.PORT || 3000
+const gitRepo = process.env.GIT_REPO || ''
 
 const slackChannelId = process.env.CHANNEL_ID || ''
 const slackToken = process.env.TOKEN || ''
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
     if (req.body) {        
-        const result = JSON.stringify(template(slackChannelId, req.body))
+        const result = JSON.stringify(template(slackChannelId, gitRepo, req.body))
         console.log('result : ', result)
     
         const options = {
