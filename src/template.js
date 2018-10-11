@@ -12,7 +12,7 @@ const template = (channel, gitRepo, data) => {
             channel: channel,
             attachments: [
                 {
-                    text: `<${build_url}|#${build_num}> - รายงานสถานะ Circleci`,
+                    text: `<${build_url}|#${build_num}> - รายงานสถานะ Circleci [azay-sign-mapper]`,
                     color: colorTemplate,
                     fields: [
                         {
