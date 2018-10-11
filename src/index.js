@@ -4,6 +4,8 @@ const axios = require('axios')
 const app = express()
 
 const template = require('./template')
+const { sendMessge } = require('./sendMsg')
+const { circleciCommand } = require('./command')
 
 const port = process.env.PORT || 3000
 const gitRepo = process.env.GIT_REPO || ''
@@ -49,22 +51,20 @@ app.post('/run-test', (req, res) => {
     console.log(req.body)
     res.setHeader('Content-Type', 'application/json')
 
-    const options = {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
-        data: { 'channel': slackChannelId, 'text': 'รับทราบ ส่งคำสั่งไปยัง CircleCi เรียบร้อยแล้ว' },
-        url: 'https://slack.com/api/chat.postMessage'
-    }
+    
 
-    axios(options)
+    circleciCommand('build')
         .then((res) => {
             console.log('success : ', res)
+            const msg = 'รับทราบ ส่งคำสั่งไปยัง CircleCi เรียบร้อยแล้ว'
+            sendMessge(msg)
             res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
         })
         .catch((err) => {
             console.log('err :', err)
             res.status(500).jsonp({ status: 500, message: err, challenge: req.body.challenge })
         })
+
 })
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))
