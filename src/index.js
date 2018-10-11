@@ -40,11 +40,8 @@ app.post('/webhook', (req, res) => {
 })
 
 app.post('/test', (req, res) => {
-    console.log('req.body :', req.body)
-    
     res.contentType('application/json')
-    res.set({ 'challenge': req.body.challenge })
-    res.status(200).jsonp({ status: 200, message: 'OK' })
+    res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
 })
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))
