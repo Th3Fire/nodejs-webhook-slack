@@ -44,7 +44,7 @@ app.post('/test', (req, res) => {
     
     res.contentType('application/json')
     res.set({ 'challenge': req.body.challenge })
-    res.status(200).jsonp({ challenge: req.body.challenge })
+    res.status(200).jsonp({ status: 200, message: 'OK' })
 })
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))
