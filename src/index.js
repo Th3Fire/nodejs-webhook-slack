@@ -39,8 +39,8 @@ app.post('/webhook', (req, res) => {
 
 })
 
-app.post('/test', (req, res) => {
-    res.contentType('application/json')
+app.post('/event', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
     res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
 })
 
