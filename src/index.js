@@ -39,4 +39,10 @@ app.post('/webhook', (req, res) => {
 
 })
 
+app.post('/test', (req, res) => {
+    console.log('req.body :', req.body)
+    res.send('GOT IT!')
+    res.status(200)
+})
+
 app.listen(port, () => console.log(`app listening on port ${port}!`))
