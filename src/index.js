@@ -14,10 +14,10 @@ const slackToken = process.env.TOKEN || ''
 app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
-    if (req.body) {        
+    if (req.body) {
         const result = JSON.stringify(template(slackChannelId, gitRepo, req.body))
         console.log('result : ', result)
-    
+
         const options = {
             method: 'POST',
             headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
@@ -43,6 +43,9 @@ app.post('/test', (req, res) => {
     console.log('req.body :', req.body)
     res.send('GOT IT!')
     res.status(200)
+    res.contentType('application/json')
+    res.statusMessage('HTTP 200 OK')
+    res.set({ challenge: req.body.challenge })
 })
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))
