@@ -4,7 +4,7 @@ const axios = require('axios')
 const app = express()
 
 const template = require('./template')
-const { sendMessge } = require('./sendMsg')
+const { sendMessge, sendEphemeralMessge } = require('./sendMsg')
 const { circleciCommand } = require('./command')
 
 const port = process.env.PORT || 3000
@@ -57,7 +57,7 @@ app.post('/run-test', (req, res) => {
         .then((res) => {
             console.log('success : ', res)
             const msg = 'รับทราบ ส่งคำสั่งไปยัง CircleCi เรียบร้อยแล้ว'
-            sendMessge(msg)
+            sendEphemeralMessge(msg)
             res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
         })
         .catch((err) => {
