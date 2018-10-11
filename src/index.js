@@ -4,8 +4,11 @@ const axios = require('axios')
 const app = express()
 
 const template = require('./template')
+const { sendMessge } = require('./sendMsg')
+const { circleciCommand } = require('./command')
 
 const port = process.env.PORT || 3000
+const gitRepo = process.env.GIT_REPO || ''
 
 const slackChannelId = process.env.CHANNEL_ID || ''
 const slackToken = process.env.TOKEN || ''
@@ -14,28 +17,53 @@ app.use(bodyParser.json());
 
 app.post('/webhook', (req, res) => {
     if (req.body) {
-        
-        const result = template(req.body)
+        const result = JSON.stringify(template(slackChannelId, gitRepo, req.body))
+        console.log('result : ', result)
 
         const options = {
             method: 'POST',
-            headers: { 'Content-type': 'application/json', 'Authorization': 'Bearer xoxp-263257028645-365043984871-450889583637-7c8a620601979f7544ae5388e3c729be' },
-            data: { channel: "GD9MHGK0X", result },
+            headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
+            data: result,
             url: 'https://slack.com/api/chat.postMessage'
         }
 
         axios(options)
             .then((res) => {
-                console.log('res :', res)
+                console.log('success : ', res)
             })
             .catch((err) => {
                 console.log('err :', err)
             })
 
-    }else {
-        res.send('GOT IT!')
-        res.status(200)
     }
+    res.send('GOT IT!')
+    res.status(200)
+
+})
+
+app.post('/event', (req, res) => {
+    console.log(req.body)
+    res.setHeader('Content-Type', 'application/json')
+    res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
+})
+
+app.post('/run-test', (req, res) => {
+    console.log(req.body)
+    res.setHeader('Content-Type', 'application/json')
+
+    
+
+    circleciCommand('build')
+        .then((res) => {
+            console.log('success : ', res)
+            const msg = 'รับทราบ ส่งคำสั่งไปยัง CircleCi เรียบร้อยแล้ว'
+            sendMessge(msg)
+            res.status(200).jsonp({ status: 200, message: 'OK', challenge: req.body.challenge })
+        })
+        .catch((err) => {
+            console.log('err :', err)
+            res.status(500).jsonp({ status: 500, message: err, challenge: req.body.challenge })
+        })
 
 })
 
