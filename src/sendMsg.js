@@ -1,12 +1,11 @@
-const slackChannelId = process.env.CHANNEL_ID || ''
-const slackToken = process.env.TOKEN || ''
+const axios = require('axios')
 
 module.exports = {
     sendMessge: (msg) => {
         const options = {
             method: 'POST',
-            headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${slackToken}` },
-            data: { 'channel': slackChannelId, 'text': msg },
+            headers: { 'Content-type': 'application/json', 'Authorization': `Bearer ${process.env.TOKEN}` },
+            data: { 'channel': process.env.CHANNEL_ID, 'text': msg },
             url: 'https://slack.com/api/chat.postMessage'
         }
 
