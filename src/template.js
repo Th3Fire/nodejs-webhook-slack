@@ -17,7 +17,7 @@ const template = (channel, gitRepo, data) => {
                     fields: [
                         {
                             title: "Commit",
-                            value: `${gitRepo}/commit/${vcs_revision}|${vcs_revision.substring(0, 7)}> (${subject})`,
+                            value: `<${gitRepo}/commit/${vcs_revision}|${vcs_revision.substring(0, 7)}> (${subject})`,
                             short: true
                         },
                         {
