@@ -44,6 +44,7 @@ app.post('/test', (req, res) => {
     res.status(200)
     res.contentType('application/json')
     res.set({ challenge: req.body.challenge })
+    res.header()
     res.send('GOT IT!')
 })
 
